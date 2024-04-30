@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 
 function App() {
-  const [counter, setCounter] = useState(0);
-
-  function increase() {
-    if (counter<9) {
-      setCounter(prev => prev + 1);
-    }
+  const [isSignedIn,setIsSignedIn] = useState(false);
+  
+  const Profile =()=>{
+    return <p>Welcome back,good to see you in here</p>
   }
-
-  function decrease() {
-    if (counter>0) {
-      setCounter(prev => prev - 1);
-    }
-    
+  const Home =()=>{
+    return <p>Please Sign in</p>
   }
-
+  const TrueorFalse =() => {
+    if(isSignedIn) return <Profile />
+    else return <Home />
+  }
+  const Button =(props) => {
+    return <button type = "button" onClick = {props.onClick}>
+      {props.isSignedIn? "Sign out"
+      : "Sign in"}
+    </button>
+  }
+  const handleClick =() => {
+    setIsSignedIn(!isSignedIn);
+  }
   return (
     <div className="App">
-      <p>Counter: {counter}</p>
-      <button onClick={decrease}>Decrease</button>
-      <button onClick={increase}>Increase</button>
+    <Button isSignedIn = {isSignedIn} onClick = {handleClick}/>
+    <TrueorFalse />
     </div>
   );
 }
-
 export default App;
